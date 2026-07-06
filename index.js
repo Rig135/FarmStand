@@ -2,6 +2,7 @@ const express = require('express')
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
+const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
 
 
@@ -18,6 +19,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/farmStand') //returns a promise
         console.log(err); 
     })
 
+app.engine('ejs',ejsMate);
 app.set('views', path.join(__dirname,'views'));
 app.set('view engine','ejs');
 
@@ -26,6 +28,10 @@ app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
 
 const categories = ['fruit','vegetable','dairy'];
+
+app.get('/', (req,res)=>{
+    res.render('products/home');
+});
 
 app.get('/products',async (req,res)=>{
     const { category } = req.query;
