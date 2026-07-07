@@ -1,13 +1,45 @@
 <% layout('layouts/boilerplate') %>
-    <h1><%= category %> Products!</h1>
-    <ul>
-        <% for(let product of products){ %>
-            <li><a href="/products/<%= product._id %>"><%= product.name  %></a></li>
+    <h1><%= category %> Products 🍀</h1>
+    <% if(category=== 'All'){ %>
+        <p class="text-secondary">Fresh and organic produce, straight from the farm.</p>
+        <% }else if(category === 'dairy'){ %>
+            <p class="text-secondary">All fresh dairy products available.</p>
+        <% }else{ %>
+            <p class="text-secondary">All fresh <%= category %>s available.</p>
         <% } %>
-    </ul>
 
-    <a href="/products/new">Add New Product</a>
+
+        <div class="d-grid gap-3 d-md-block mb-3">
+            <a href="/products"
+            class="btn <%= category==='All' ? 'btn-success' : 'btn-outline-success' %>">All</a>
+            <a href="/products?category=fruit" 
+            class="btn <%= category==='fruit' ? 'btn-success' : 'btn-outline-success' %>">Fruits</a>
+            <a href="/products?category=vegetable" 
+            class="btn <%= category==='vegetable' ? 'btn-success' : 'btn-outline-success' %>">Vegetables</a>
+            <a href="/products?category=dairy" 
+            class="btn <%= category==='dairy' ? 'btn-success' : 'btn-outline-success' %>">Dairy</a>
+        </div>
+    
+    <div class="row g-4 mb-3">
+        <% for(let product of products){ %>
+            <div class="col-md-3">
+                <div class="card h-100">
+                    <img src="<%= product.image %>" class="card-img-top" alt="" style="height:250px; object-fit:cover;">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= product.name %></h5>
+                        <p class="card-text text-secondary"><%= product.category %></p>
+                        <h6 class="card-text">₹<%= product.price %> <small class="text-body-secondary"> /unit</small></h6>
+                        <a href="/products/<%= product._id %>" class="btn btn-outline-success">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    </div>
+
+    <!-- <a href="/products/new">Add New Product</a> -->
     <% if(category !== 'All'){ %>
         <a href="/products">All Products</a>
     <% } %>
-    
+ 

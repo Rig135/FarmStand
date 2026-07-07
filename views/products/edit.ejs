@@ -1,21 +1,70 @@
 <% layout('layouts/boilerplate') %>
 
-    <h1>Edit Product</h1>
+<div class="row align-items-center">
+<a class="text-secondary mb-4" href="/products" style="text-decoration: none;">← Back to Products</a>
+<div class="col-lg-6">
+    
+    <h1 class="text">🍃 Update Product 🍃</h1>
+    <p class="text-secondary">Update the details of your product.</p>
+    
     <form action="/products/<%= product._id%>?_method=PUT" method="POST">
-        <label for="name">Product name:</label>
-        <input type="text" name="name" id="name" placeholder="product name" value="<%= product.name  %>">
-        <br>
-        <label for="price">Price (in ₹ per unit): </label>
-        <input type="number" name="price" id="price" value="<%= product.price %>">
-<br>
-        <label for="category">Select Category: </label>
-        <select type="text" name="category" id="category">
+      <div class="mb-3">
+        <label class="form-label" for="name">Product name:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="name"
+          name="name"
+          value="<%= product.name  %>"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="price">Price (in ₹ per unit):</label>
+        <div class="input-group">
+          <span class="input-group-text" id="price-label">₹</span>
+          <input
+            type="number"
+            class="form-control"
+            id="price"
+            name="price"
+            aria-label="price"
+            aria-describedby="price-label"
+            value="<%= product.price  %>"
+          />
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="image">Image Url:</label>
+        <input
+          class="form-control"
+          type="url"
+          id="image"
+          name="image"
+          value="<%= product.image  %>"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="category">Select Category: </label>  
+        <select class="form-select" type="text" name="category" id="category">
             <% for(let category of categories){ %>
                 <option value="<%= category %>" <%= product.category === category ? 'selected':'' %>><%= category %></option>
                 <% } %>
         </select>
-        <br>
-        <button>Add Product</button>
+        </div>
+        <div class="d-grid gap-2 mb-3">
+            <button class="btn btn-success">Update Product</button>
+            <a class="btn btn-danger" href="/products/<%= product._id %>">Cancel</a>
+        </div>
     </form>
+  
+</div>
 
-    <a href="/products/<%= product._id %>">Cancel</a>
+<div class="col-lg-6 align-items-center">
+    <img src="<%= product.image %>" 
+    class="img-fluid rounded"
+    alt="<%= product.name %>">
+</div>
+
+</div>
+
