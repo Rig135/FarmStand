@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Product = require('./models/product');
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/farmStand') //returns a promise
+mongoose.connect('mongodb://127.0.0.1:27017/farmStand') 
     .then(()=>{
         console.log("MONGO Connection Open!!!");
     })
@@ -11,18 +11,6 @@ mongoose.connect('mongodb://127.0.0.1:27017/farmStand') //returns a promise
         console.log("Oh no MONGO Connection error!!!");
         console.log(err); 
     })
-
-// const p = new Product({
-//     name: 'Ruby Grapefruit',
-//     price: 140,
-//     category: 'fruit'
-// })
-
-// p.save().then(p=>{
-//     console.log(p);
-// }).catch(e =>{
-//     console.log(e);
-// })
 
 const seedProducts = [
     {
@@ -66,11 +54,3 @@ seedDB().then(()=>{
     mongoose.connection.close();
 })
 
-
-// Product.insertMany(seedProducts)
-// .then(res => {
-//     console.log(res);
-// })
-// .catch(e =>{
-//     console.log(e);
-// })
