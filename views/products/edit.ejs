@@ -7,7 +7,7 @@
     <h1 class="text">🍃 Update Product 🍃</h1>
     <p class="text-secondary">Update the details of your product.</p>
     
-    <form action="/products/<%= product._id%>?_method=PUT" method="POST">
+    <form action="/products/<%= product._id%>?_method=PUT" method="POST" novalidate class="validated-form">
       <div class="mb-3">
         <label class="form-label" for="name">Product name:</label>
         <input
@@ -16,7 +16,11 @@
           id="name"
           name="name"
           value="<%= product.name  %>"
+          required
         />
+        <div class="valid-feedback">
+          looks good!
+        </div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="price">Price (in ₹ per unit):</label>
@@ -30,7 +34,11 @@
             aria-label="price"
             aria-describedby="price-label"
             value="<%= product.price  %>"
+            required
           />
+          <div class="valid-feedback">
+          looks good!
+        </div>
         </div>
       </div>
 
@@ -42,7 +50,11 @@
           id="image"
           name="image"
           value="<%= product.image  %>"
+          required
         />
+        <div class="valid-feedback">
+          looks good!
+        </div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="category">Select Category: </label>  
@@ -51,6 +63,9 @@
                 <option value="<%= category %>" <%= product.category === category ? 'selected':'' %>><%= category %></option>
                 <% } %>
         </select>
+        <div class="valid-feedback">
+          looks good!
+        </div>
         </div>
         <div class="d-grid gap-2 mb-3">
             <button class="btn btn-success">Update Product</button>
